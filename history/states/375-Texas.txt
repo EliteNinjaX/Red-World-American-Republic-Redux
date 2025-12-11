@@ -26,10 +26,10 @@ state={
 		}
 		add_core_of = TEX
 		victory_points = {
-			10337 45 
+			10337 30 
 		}
 		victory_points = {
-			6798 10
+			6798 25
 		}
 		victory_points = {
 			9773 2
