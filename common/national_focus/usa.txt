@@ -3102,7 +3102,7 @@ focus_tree = {
 	}
 	focus = {
 		id = USA_salute_the_soldiers
-		icon = allies_infantry
+		icon = GFX_focus_generic_military_mission
 		cost = 5
 		prerequisite = {
 			focus = USA_glory_glory_hallelujah
@@ -3113,16 +3113,20 @@ focus_tree = {
 		    army_experience = 15
 			add_doctrine_cost_reduction = {
 				name = land_doc_bonus
-				cost_reduction = 0.5
+				cost_reduction = 0.75
 				uses = 1
 				category = land_doctrine
+			}
+			add_timed_idea = {
+				idea = idea_USA_salute_the_soldiers
+				days = 365
 			}
 		}
 
 	}
 	focus = {
 		id = USA_methods_of_reunification
-		icon = army_doctrine
+		icon = GFX_focus_ETH_freedom_at_gunpoint
 		cost = 5
 		prerequisite = {
 			focus = USA_salute_the_soldiers
@@ -3130,35 +3134,37 @@ focus_tree = {
 		x = 82
 		y = 2
 		completion_reward = {
-			add_research_slot = 1
-		}
-
-	}
-	focus = {
-		id = USA_aim_for_the_little_man
-		icon = generic_marching
-		cost = 5
-		prerequisite = {
-			focus = USA_methods_of_reunification
-		}
-		x = 82
-		y = 3
-		completion_reward = {
-		    add_tech_bonus = {
+			add_tech_bonus = {
 				name = infantry_weapons_bonus
 				bonus = 1
 				uses = 1
 				category = infantry_weapons
 			}
+			if = {
+				limit = {
+					372 = { 
+						is_fully_controlled_by = ROOT
+						}
+					}
+					372 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = arms_factory
+							level = 2
+							instant_build = yes
+						}
+					}
+			}
 		}
 
 	}
+
 	focus = {
 		id = USA_special_forces
 		icon = GFX_goal_counter
 		cost = 5
 		prerequisite = {
-			focus = USA_aim_for_the_little_man
+			focus = USA_recruitment_campaign
 		}
 		x = 81
 		y = 5
@@ -3182,23 +3188,33 @@ focus_tree = {
 		x = 84
 		y = 2
 		completion_reward = {
-		    add_tech_bonus = {
+			 add_tech_bonus = {
 				name = cat_mechanized_equipment_bonus
-				bonus = 1
-				uses = 1
+				bonus = 1.5
+				uses = 3
 				category = cat_mechanized_equipment
 			}
-			add_breakthrough_progress = {
-				specialization = specialization_land
-				value = 0.5
+			if = {
+				limit = {
+					374 = { 
+						is_fully_controlled_by = ROOT
+						}
+					}
+					374 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = arms_factory
+							level = 2
+							instant_build = yes
+						}
+					}
 			}
-			army_experience = 5
 		}
 
 	}
 	focus = {
-		id = USA_the_stronger_the_better
-		icon = tanks
+		id = USA_heavy_forces
+		icon = GFX_focus_generic_heavy_tank
 		cost = 5
 		prerequisite = {
 			focus = USA_weapons_of_reunification
@@ -3208,62 +3224,99 @@ focus_tree = {
 		completion_reward = {
 		    add_tech_bonus = {
 				name = armor_bonus
-				bonus = 1
-				uses = 1
+				bonus = 1.5
+				uses = 2
 				category = armor
 			}
-			add_breakthrough_progress = {
-				specialization = specialization_land
-				value = 0.5
+			if = {
+				limit = {
+					365 = { 
+						is_fully_controlled_by = ROOT
+						}
+					}
+					365 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = arms_factory
+							level = 2
+							instant_build = yes
+						}
+					}
 			}
 		}
 
 	}
 	focus = {
 		id = USA_recruitment_campaign
-		icon = national_unity
+		icon = generic_marching
 		cost = 5
-		prerequisite = {
-			focus = USA_aim_for_the_little_man
+		x = 82
+		y = 3
+		completion_reward = {
+		    add_ideas = idea_usa_recruitment_campaign
+			if = {
+				limit = {
+					368 = { 
+						is_fully_controlled_by = ROOT
+						}
+					}
+					368 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = arms_factory
+							level = 2
+							instant_build = yes
+						}
+					}
+			}
+			country_event = { id = usa.134 }
 		}
 		prerequisite = {
-			focus = USA_the_stronger_the_better
+			focus = USA_methods_of_reunification
+		}
+	}
+	focus = {
+		id = USA_modernize_fort_gordon
+		icon = GFX_focus_research
+		cost = 5
+		prerequisite = {
+			focus = USA_recruitment_campaign
+		}
+		prerequisite = {
+			focus = USA_heavy_forces
 		}
 		x = 83
 		y = 4
 		completion_reward = {
-		    add_ideas = idea_usa_recruitment_campaign
-			army_experience = 5
-			country_event = { id = usa.134 }
+			add_research_slot = 1
 		}
-
 	}
 	focus = {
-		id = USA_heavy_forces
+		id = USA_the_stronger_the_better
 		icon = GFX_goal_tanks2
 		cost = 5
 		prerequisite = {
-			focus = USA_the_stronger_the_better
+			focus = USA_heavy_forces
 		}
 		x = 85
 		y = 5
 		completion_reward = {
 		    add_tech_bonus = {
 				name = armor_bonus
-				bonus = 1
+				bonus = 1.5
 				uses = 1
 				category = armor
 			}
 			add_breakthrough_progress = {
 				specialization = specialization_land
-				value = 0.5
+				value = 2
 			}
 		}
 
 	}
 	focus = {
 		id = USA_salute_the_sailors
-		icon = wolf_pack
+		icon = GFX_focus_generic_naval_discipline
 		cost = 5
 		prerequisite = {
 			focus = USA_glory_glory_hallelujah
@@ -3274,9 +3327,13 @@ focus_tree = {
 		    navy_experience = 15
 			add_doctrine_cost_reduction = {
 				name = naval_doc_bonus
-				cost_reduction = 0.5
+				cost_reduction = 0.75
 				uses = 1
 				category = naval_doctrine
+			}
+			add_timed_idea = {
+				idea = idea_USA_salute_the_sailors
+				days = 365
 			}
 		}
 
@@ -3434,7 +3491,7 @@ focus_tree = {
 	}
 	focus = {
 		id = USA_salute_the_pilots
-		icon = air_defense
+		icon = GFX_focus_CHI_military_mission
 		cost = 5
 		prerequisite = {
 			focus = USA_glory_glory_hallelujah
@@ -3442,7 +3499,17 @@ focus_tree = {
 		x = 91
 		y = 1
 		completion_reward = {
-		    air_experience = 10
+		    air_experience = 15
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 0.75
+				uses = 1
+				category = air_doctrine
+			}
+			add_timed_idea = {
+				idea = idea_USA_salute_the_pilots
+				days = 365
+			}
 		}
 
 	}
@@ -3545,6 +3612,34 @@ focus_tree = {
 			add_breakthrough_progress = {
 				specialization = specialization_air
 				value = 0.5
+			}
+		}
+
+	}
+	focus = {
+		id = USA_renew_doctrine
+		icon = close_air_support
+		cost = 10
+		prerequisite = {
+			focus = USA_modern_strategies
+		}
+		x = 93
+		y = 4
+		completion_reward = {
+		    add_tech_bonus = {
+				name = radar_tech_bonus
+				bonus = 0.5
+				uses = 1
+				category = radar_tech
+			}
+			add_breakthrough_progress = {
+				specialization = specialization_air
+				value = 0.5
+			}
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 1
+				category = air_doctrine
 			}
 		}
 
@@ -5925,34 +6020,6 @@ focus_tree = {
 				add_war_support = 0.10
 			}
 			country_event = { id = usa.144 }
-		}
-
-	}
-	focus = {
-		id = USA_renew_doctrine
-		icon = close_air_support
-		cost = 10
-		prerequisite = {
-			focus = USA_modern_strategies
-		}
-		x = 93
-		y = 4
-		completion_reward = {
-		    add_tech_bonus = {
-				name = radar_tech_bonus
-				bonus = 0.5
-				uses = 1
-				category = radar_tech
-			}
-			add_breakthrough_progress = {
-				specialization = specialization_air
-				value = 0.5
-			}
-			add_doctrine_cost_reduction = {
-				cost_reduction = 0.5
-				uses = 1
-				category = air_doctrine
-			}
 		}
 
 	}
