@@ -25,6 +25,11 @@ focus_tree = {
 	
 	continuous_focus_position = { x = 50 y = 1100 }
 	default = no
+	
+	#####################
+	####    Texas    ####
+	#####################
+	
 	focus = {
 		id = USA_the_texan_question
 		icon = texan_question
@@ -32,17 +37,224 @@ focus_tree = {
 		ai_will_do = {
 			base = 100
 		}
-		x = 8
+		x = 5
 		y = 0
 		available = {
+			
+			has_army_manpower = { size > 499999 }
 		    has_global_flag = texas_senate_attack
 		}
+		search_filters ={FOCUS_FILTER_ANNEXATION FOCUS_FILTER_POLITICAL FOCUS_FILTER_MILITARY_CHARACTER FOCUS_FILTER_ARMY_XP FOCUS_FILTER_STABILITY}
 		completion_reward = {
 		    add_political_power = 100
 			country_event = { id = usa.4 }
 		}
 
 	}
+	focus = {
+		id = USA_state_of_texas
+		icon = republic_of_texas
+		cost = 2
+		ai_will_do = {
+			base = 90
+		}
+		prerequisite = {
+			focus = USA_the_texan_question
+		}
+		available = {
+		    has_war = no
+			has_country_flag = state_of_texas
+		}
+		x = 3
+		y = 1
+		will_lead_to_war_with = TEX
+		search_filters ={FOCUS_FILTER_ANNEXATION}
+		completion_reward = {
+		    add_stability = -0.1
+		}
+	}
+	focus = {
+		id = USA_the_flag
+		icon = state_of_texas
+		cost = 4
+		ai_will_do = {
+			base = 100
+		}
+		prerequisite = {
+			focus = USA_state_of_texas
+		}
+		x = 1
+		y = 2
+		search_filters ={FOCUS_FILTER_ANNEXATION}
+		completion_reward = {
+		    country_event = { id = usa.12 }
+		}
+
+	}
+	focus = {
+		id = USA_structure_of_the_state
+		icon = political_pressure
+		cost = 4
+		ai_will_do = {
+			base = 100
+		}
+		prerequisite = {
+			focus = USA_state_of_texas
+		}
+		x = 3
+		y = 2
+		search_filters ={FOCUS_FILTER_ANNEXATION}
+		completion_reward = {
+		    country_event = { id = usa.13 }
+		}
+	}
+	focus = {
+		id = USA_texan_senate
+		icon = manipulate_swedish_banks
+		cost = 4
+		ai_will_do = {
+			base = 100
+		}
+		prerequisite = {
+			focus = USA_state_of_texas
+		}
+		x = 5
+		y = 2
+		search_filters ={FOCUS_FILTER_ANNEXATION}
+		completion_reward = {
+		    country_event = { id = usa.14 }
+		}
+
+	}
+	focus = {
+		id = USA_the_state_solution
+		icon = attack_allies
+		cost = 5
+		ai_will_do = {
+			base = 100
+		}
+		prerequisite = {
+			focus = USA_the_flag
+		}
+		prerequisite = {
+			focus = USA_structure_of_the_state
+		}
+		prerequisite = {
+			focus = USA_texan_senate
+		}
+		x = 3
+		y = 3
+		search_filters ={FOCUS_FILTER_ANNEXATION}
+		completion_reward = {
+		    if = {
+			    limit = {
+				    AND = {
+					    has_country_flag = senate_dissolved
+						has_country_flag = state_divided_texas
+						has_country_flag = flag_only_republic
+					}
+				}
+				country_event = { id = usa.15 }
+				remove_ideas = idea_usa_texan_troubles
+			}
+			if = {
+			    limit = {
+				    NOT = {
+					    AND = {
+						    has_country_flag = senate_dissolved
+						    has_country_flag = state_divided_texas
+						    has_country_flag = flag_only_republic
+						}
+					}
+				}
+				remove_ideas = idea_usa_texan_troubles
+			}
+            core_TEX = yes
+		}
+	}
+	
+	focus = {
+		id = USA_occupy_dallas
+
+		icon = GFX_focus_generic_attack_czechoslovakia
+		alternate_icon = GFX_focus_GER_demand_sudetenland
+
+		prerequisite = { focus =  }
+
+		mutually_exclusive = { focus = GER_befriend_czechoslovakia }
+
+		x = 5
+		y = 1
+		relative_position_id = 
+
+		cost = 10
+
+		will_lead_to_war_with = TEX
+
+		bypass = {
+			OR = {
+				AND = {
+					69 = { #NORTH SUDETENLAND
+						controller = {
+							OR = {
+								has_war_with = GER
+								tag = ROOT
+							}
+						}
+					}
+					972 = { #EASTERN SUDETENLAND
+						controller = {
+							OR = {
+								has_war_with = GER
+								tag = ROOT
+							}
+						}
+					}
+					74 = { #SOUTH SUDETENLAND
+						controller = {
+							OR = {
+								has_war_with = GER
+								tag = ROOT
+							}
+						}
+					}
+				}
+				CZE = { 
+					is_subject_of = ROOT
+					OR = {
+						has_completed_focus = CZE_german_minor_ally
+						has_completed_focus = CZE_german_puppet
+					}
+				}
+			}
+		}
+
+		available = {
+			is_subject = no
+			has_army_manpower = { size > 724999 }
+		}
+		
+		cancel = {
+			is_subject = yes
+		}
+		cancel_if_invalid = yes
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION  }
+
+		completion_reward = {
+			
+		}
+	}
+	
+	####				####
+	####	Diplomatic 	####
+	####				####
+	
+	
 	focus = {
 		id = USA_state_of_america
 		icon = focus_2010_election
@@ -54,8 +266,8 @@ focus_tree = {
 		completion_reward = {
 		    
 		}
-
 	}
+	
 	focus = {
 		id = USA_push_for_recognition
 		icon = focus_commonwealth_un_membership
@@ -103,239 +315,6 @@ focus_tree = {
 		    army_experience = 70
 			navy_experience = 70
 			air_experience = 70
-		}
-
-	}
-	focus = {
-		id = USA_state_of_texas
-		icon = state_of_texas
-		cost = 2
-		ai_will_do = {
-			base = 90
-		}
-		prerequisite = {
-			focus = USA_the_texan_question
-		}
-		mutually_exclusive = {
-			focus = USA_republic_of_texas
-		}
-		available = {
-		    has_war = no
-			has_country_flag = state_of_texas
-		}
-		x = 7
-		y = 1
-		will_lead_to_war_with = TEX
-		completion_reward = {
-		    add_stability = 0.01
-		}
-
-	}
-	focus = {
-		id = USA_the_flag
-		icon = two_flags
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = USA_state_of_texas
-		}
-		x = 3
-		y = 2
-		completion_reward = {
-		    country_event = { id = usa.12 }
-		}
-
-	}
-	focus = {
-		id = USA_structure_of_the_state
-		icon = political_pressure
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = USA_state_of_texas
-		}
-		x = 5
-		y = 2
-		completion_reward = {
-		    country_event = { id = usa.13 }
-		}
-
-	}
-	focus = {
-		id = USA_texan_senate
-		icon = manipulate_swedish_banks
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = USA_state_of_texas
-		}
-		x = 7
-		y = 2
-		completion_reward = {
-		    country_event = { id = usa.14 }
-		}
-
-	}
-	focus = {
-		id = USA_the_state_solution
-		icon = attack_allies
-		cost = 5
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = USA_the_flag
-		}
-		prerequisite = {
-			focus = USA_structure_of_the_state
-		}
-		prerequisite = {
-			focus = USA_texan_senate
-		}
-		x = 5
-		y = 3
-		completion_reward = {
-		    if = {
-			    limit = {
-				    AND = {
-					    has_country_flag = senate_dissolved
-						has_country_flag = state_divided_texas
-						has_country_flag = flag_only_republic
-					}
-				}
-				country_event = { id = usa.15 }
-				remove_ideas = idea_usa_texan_troubles
-			}
-			if = {
-			    limit = {
-				    NOT = {
-					    AND = {
-						    has_country_flag = senate_dissolved
-						    has_country_flag = state_divided_texas
-						    has_country_flag = flag_only_republic
-						}
-					}
-				}
-				remove_ideas = idea_usa_texan_troubles
-			}
-            core_TEX = yes
-		}
-
-	}
-	focus = {
-		id = USA_republic_of_texas
-		icon = republic_of_texas
-		cost = 2
-		ai_will_do = {
-			base = 10
-		}
-		prerequisite = {
-			focus = USA_the_texan_question
-		}
-		available = {
-		    has_war = no
-			has_country_flag = republic_of_texas
-		}
-		mutually_exclusive = {
-			focus = USA_state_of_texas
-		}
-		x = 9
-		y = 1
-		will_lead_to_war_with = TEX
-		completion_reward = {
-			if = {
-				limit = {
-					TEX = {
-						exists = no
-					}
-				}
-				TEX = {
-					transfer_state = 375
-					transfer_state = 899
-				}
-				puppet = TEX
-			}
-		    add_stability = 0.01
-		}
-
-	}
-	focus = {
-		id = USA_currency
-		icon = investigate_industrial_corruption
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = USA_republic_of_texas
-		}
-		x = 9
-		y = 2
-		completion_reward = {
-		    country_event = { id = usa.16 }
-		}
-
-	}
-	focus = {
-		id = USA_national_guard
-		icon = national_guard
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = USA_republic_of_texas
-		}
-		x = 11
-		y = 2
-		completion_reward = {
-		    country_event = { id = usa.17 }
-		}
-
-	}
-	focus = {
-		id = USA_laws
-		icon = laws
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = USA_republic_of_texas
-		}
-		x = 13
-		y = 2
-		completion_reward = {
-		    country_event = { id = usa.18 }
-		}
-
-	}
-	focus = {
-		id = USA_the_republic_solution
-		icon = major_alliance
-		cost = 5
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = USA_currency
-		}
-		prerequisite = {
-			focus = USA_national_guard
-		}
-		prerequisite = {
-			focus = USA_laws
-		}
-		x = 11
-		y = 3
-		completion_reward = {
-		    remove_ideas = idea_usa_texan_troubles
 		}
 
 	}
