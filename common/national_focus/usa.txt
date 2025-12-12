@@ -3292,6 +3292,19 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = USA_expand_fort_jackson
+		icon = GFX_focus_research
+		cost = 5
+		prerequisite = {
+			focus = USA_modernize_fort_gordon
+		}
+		x = 83
+		y = 6
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+	focus = {
 		id = USA_the_stronger_the_better
 		icon = GFX_goal_tanks2
 		cost = 5
