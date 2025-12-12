@@ -22,6 +22,7 @@ state_category = rural
 		victory_points = {
 			5061 2
 		}
+		set_demilitarized_zone = yes
 	}
 	manpower=4241181
 	buildings_max_level_factor=1.000

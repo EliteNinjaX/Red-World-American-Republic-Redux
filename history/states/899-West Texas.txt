@@ -23,6 +23,7 @@ state={
 		buildings = {
 			infrastructure = 3
 		}
+		set_demilitarized_zone = yes
 
 	}
 	manpower=1078669

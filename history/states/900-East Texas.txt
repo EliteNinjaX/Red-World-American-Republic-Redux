@@ -33,6 +33,7 @@ state={
 			arms_factory = 2
 			air_base = 5
 		}
+		set_demilitarized_zone = yes
 	}
 
 	resources = {
