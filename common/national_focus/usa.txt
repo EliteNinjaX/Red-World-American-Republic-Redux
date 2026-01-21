@@ -44,7 +44,7 @@ focus_tree = {
 			has_army_manpower = { size > 499999 }
 		    has_global_flag = texas_senate_attack
 		}
-		search_filters ={FOCUS_FILTER_ANNEXATION FOCUS_FILTER_POLITICAL FOCUS_FILTER_MILITARY_CHARACTER FOCUS_FILTER_ARMY_XP FOCUS_FILTER_STABILITY}
+		search_filters ={FOCUS_FILTER_ANNEXATION FOCUS_FILTER_POLITICAL FOCUS_FILTER_MILITARY_CHARACTER}
 		completion_reward = {
 		    add_political_power = 100
 			country_event = { id = usa.4 }
@@ -179,11 +179,13 @@ focus_tree = {
 		icon = GFX_focus_generic_attack_czechoslovakia
 		alternate_icon = GFX_focus_GER_demand_sudetenland
 
-		prerequisite = { focus =  }
+		prerequisite = {
+			focus = USA_the_texan_question
+		}
 
-		mutually_exclusive = { focus = GER_befriend_czechoslovakia }
+		mutually_exclusive = { focus = USA_state_of_texas }
 
-		x = 5
+		x = 10
 		y = 1
 		relative_position_id = 
 
@@ -191,43 +193,6 @@ focus_tree = {
 
 		will_lead_to_war_with = TEX
 
-		bypass = {
-			OR = {
-				AND = {
-					69 = { #NORTH SUDETENLAND
-						controller = {
-							OR = {
-								has_war_with = GER
-								tag = ROOT
-							}
-						}
-					}
-					972 = { #EASTERN SUDETENLAND
-						controller = {
-							OR = {
-								has_war_with = GER
-								tag = ROOT
-							}
-						}
-					}
-					74 = { #SOUTH SUDETENLAND
-						controller = {
-							OR = {
-								has_war_with = GER
-								tag = ROOT
-							}
-						}
-					}
-				}
-				CZE = { 
-					is_subject_of = ROOT
-					OR = {
-						has_completed_focus = CZE_german_minor_ally
-						has_completed_focus = CZE_german_puppet
-					}
-				}
-			}
-		}
 
 		available = {
 			is_subject = no
@@ -235,7 +200,6 @@ focus_tree = {
 		}
 		
 		cancel = {
-			is_subject = yes
 		}
 		cancel_if_invalid = yes
 
@@ -249,12 +213,7 @@ focus_tree = {
 			
 		}
 	}
-	
-	####				####
-	####	Diplomatic 	####
-	####				####
-	
-	
+	###Polical ###
 	focus = {
 		id = USA_state_of_america
 		icon = focus_2010_election
@@ -266,57 +225,6 @@ focus_tree = {
 		completion_reward = {
 		    
 		}
-	}
-	
-	focus = {
-		id = USA_push_for_recognition
-		icon = focus_commonwealth_un_membership
-		cost = 15
-		available = {
-		    OR = {
-			    has_completed_focus = USA_our_own_paramilitary
-				has_completed_focus = USA_a_white_army
-				has_completed_focus = USA_crush_personal_liberties
-				has_completed_focus = USA_the_kings_army
-				has_completed_focus = USA_army_with_a_nation
-				has_completed_focus = USA_proclaim_confederate_states
-				has_completed_focus = USA_prepare_for_the_healing_process
-				has_completed_focus = USA_freedom_act
-			}
-		}
-		x = 74
-		y = 0
-		completion_reward = {
-		    remove_ideas = idea_usa_international_stigma
-		}
-
-	}
-	focus = {
-		id = USA_glory_glory_hallelujah
-		icon = american_military_agreement
-		cost = 10
-		ai_will_do = {
-			modifier = {
-				NOT = {
-					has_completed_focus = USA_the_united_states
-					has_completed_focus = USA_america_is_back
-					has_completed_focus = USA_defend_our_borders
-					has_completed_focus = USA_operation_free_princes
-					has_completed_focus = USA_western_industry
-					has_completed_focus = USA_total_war
-					has_completed_focus = USA_liberate_the_american_people
-				}
-				factor = 0
-			}
-		}
-		x = 87
-		y = 0
-		completion_reward = {
-		    army_experience = 70
-			navy_experience = 70
-			air_experience = 70
-		}
-
 	}
 	focus = {
 		id = USA_embrace_nationalist_values
@@ -2854,804 +2762,6 @@ focus_tree = {
 
 	}
 	focus = {
-		id = USA_new_friendships
-		icon = improve_relations
-		cost = 7.2
-		prerequisite = {
-			focus = USA_push_for_recognition
-		}
-		mutually_exclusive = {
-			focus = USA_old_friendships
-		}
-		x = 72
-		y = 1
-		completion_reward = {
-		    add_stability = -0.02
-			add_political_power = 70
-		}
-
-	}
-	focus = {
-		id = USA_befriend_spain
-		icon = spain
-		cost = 7.2
-		prerequisite = {
-			focus = USA_new_friendships
-		}
-		x = 70
-		y = 2
-		completion_reward = {
-		    SPR = {
-			    add_opinion_modifier = {
-				    target = USA
-				    modifier = declaration_of_friendship
-			    }
-			}
-		}
-
-	}
-	focus = {
-		id = USA_befriend_thailand
-		icon = thailand
-		cost = 7.2
-		prerequisite = {
-			focus = USA_new_friendships
-		}
-		x = 72
-		y = 2
-		completion_reward = {
-		    SIA = {
-			    add_opinion_modifier = {
-				    target = USA
-				    modifier = declaration_of_friendship
-			    }
-			}
-		}
-
-	}
-	focus = {
-		id = USA_approach_china
-		icon = china
-		cost = 7.2
-		prerequisite = {
-			focus = USA_befriend_spain
-			focus = USA_befriend_thailand
-		}
-		mutually_exclusive = {
-			focus = USA_support_japan
-		}
-		x = 70
-		y = 3
-		completion_reward = {
-		    PRC = {
-			    add_opinion_modifier = {
-				    target = USA
-				    modifier = declaration_of_friendship
-			    }
-			}
-			PRC = {
-			    add_opinion_modifier = {
-				    target = ROOT
-				    modifier = trade_influence_1
-			   }
-			}
-		}
-
-	}
-	focus = {
-		id = USA_support_japan
-		icon = japan
-		cost = 7.2
-		prerequisite = {
-			focus = USA_befriend_thailand
-			focus = USA_befriend_spain
-		}
-		mutually_exclusive = {
-			focus = USA_approach_china
-		}
-		x = 72
-		y = 3
-		completion_reward = {
-		    JAP = {
-			    add_opinion_modifier = {
-				    target = USA
-				    modifier = declaration_of_friendship
-			    }
-			}
-			JAP = {
-			    add_opinion_modifier = {
-				    target = ROOT
-				    modifier = trade_influence_1
-			   }
-			}
-		}
-
-	}
-	focus = {
-		id = USA_old_friendships
-		icon = defence
-		cost = 7.2
-		prerequisite = {
-			focus = USA_push_for_recognition
-		}
-		mutually_exclusive = {
-			focus = USA_new_friendships
-		}
-		x = 76
-		y = 1
-		completion_reward = {
-		    add_political_power = 40
-		}
-
-	}
-	focus = {
-		id = USA_league_of_america
-		icon = alliance
-		cost = 10
-		available = {
-			has_country_flag = the_united_states_are_back
-		}
-		prerequisite = {
-			focus = USA_new_friendships
-			focus = USA_old_friendships
-		}
-		x = 74
-		y = 2
-		completion_reward = {
-		    set_rule = {
-				can_create_factions = yes
-			}
-		}
-
-	}
-	focus = {
-		id = USA_befriend_canada
-		icon = canada
-		cost = 7.2
-		prerequisite = {
-			focus = USA_old_friendships
-		}
-		x = 76
-		y = 2
-		completion_reward = {
-		    CAN = {
-			    add_opinion_modifier = {
-				    target = USA
-				    modifier = declaration_of_friendship
-			    }
-			}
-		}
-
-	}
-	focus = {
-		id = USA_befriend_iran
-		icon = iran
-		cost = 7.2
-		prerequisite = {
-			focus = USA_old_friendships
-		}
-		x = 78
-		y = 2
-		completion_reward = {
-		    PER = {
-			    add_opinion_modifier = {
-				    target = USA
-				    modifier = declaration_of_friendship
-			    }
-			}
-		}
-
-	}
-	focus = {
-		id = USA_befriend_turkey
-		icon = turkey
-		cost = 7.2
-		prerequisite = {
-			focus = USA_befriend_canada
-			focus = USA_befriend_iran
-		}
-		x = 76
-		y = 3
-		completion_reward = {
-		    TUR = {
-			    add_opinion_modifier = {
-				    target = USA
-				    modifier = declaration_of_friendship
-			    }
-			}
-			TUR = {
-			    add_opinion_modifier = {
-				    target = ROOT
-				    modifier = trade_influence_1
-			   }
-			}
-		}
-
-	}
-	focus = {
-		id = USA_approach_britain
-		icon = britain
-		cost = 7.2
-		prerequisite = {
-			focus = USA_befriend_iran
-			focus = USA_befriend_canada
-		}
-		x = 78
-		y = 3
-		completion_reward = {
-		    ENG = {
-			    add_opinion_modifier = {
-				    target = USA
-				    modifier = declaration_of_friendship
-			    }
-			}
-			ENG = {
-			    add_opinion_modifier = {
-				    target = ROOT
-				    modifier = trade_influence_1
-			   }
-			}
-		}
-
-	}
-	focus = {
-		id = USA_salute_the_soldiers
-		icon = GFX_focus_generic_military_mission
-		cost = 5
-		prerequisite = {
-			focus = USA_glory_glory_hallelujah
-		}
-		x = 83
-		y = 1
-		completion_reward = {
-		    army_experience = 15
-			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
-				cost_reduction = 0.75
-				uses = 1
-				category = land_doctrine
-			}
-			add_timed_idea = {
-				idea = idea_USA_salute_the_soldiers
-				days = 365
-			}
-		}
-
-	}
-	focus = {
-		id = USA_methods_of_reunification
-		icon = GFX_focus_ETH_freedom_at_gunpoint
-		cost = 5
-		prerequisite = {
-			focus = USA_salute_the_soldiers
-		}
-		x = 82
-		y = 2
-		completion_reward = {
-			add_tech_bonus = {
-				name = infantry_weapons_bonus
-				bonus = 1
-				uses = 1
-				category = infantry_weapons
-			}
-			if = {
-				limit = {
-					372 = { 
-						is_fully_controlled_by = ROOT
-						}
-					}
-					372 = {
-						add_extra_state_shared_building_slots = 2
-						add_building_construction = {
-							type = arms_factory
-							level = 2
-							instant_build = yes
-						}
-					}
-			}
-		}
-
-	}
-
-	focus = {
-		id = USA_special_forces
-		icon = GFX_goal_counter
-		cost = 5
-		prerequisite = {
-			focus = USA_recruitment_campaign
-		}
-		x = 81
-		y = 5
-		completion_reward = {
-		    add_tech_bonus = {
-				name = para_tech_bonus
-				bonus = 1
-				uses = 1
-				category = para_tech
-			}
-		}
-
-	}
-	focus = {
-		id = USA_weapons_of_reunification
-		icon = GFX_goal_ifv
-		cost = 5
-		prerequisite = {
-			focus = USA_salute_the_soldiers
-		}
-		x = 84
-		y = 2
-		completion_reward = {
-			 add_tech_bonus = {
-				name = cat_mechanized_equipment_bonus
-				bonus = 1.5
-				uses = 3
-				category = cat_mechanized_equipment
-			}
-			if = {
-				limit = {
-					374 = { 
-						is_fully_controlled_by = ROOT
-						}
-					}
-					374 = {
-						add_extra_state_shared_building_slots = 2
-						add_building_construction = {
-							type = arms_factory
-							level = 2
-							instant_build = yes
-						}
-					}
-			}
-		}
-
-	}
-	focus = {
-		id = USA_heavy_forces
-		icon = GFX_focus_generic_heavy_tank
-		cost = 5
-		prerequisite = {
-			focus = USA_weapons_of_reunification
-		}
-		x = 84
-		y = 3
-		completion_reward = {
-		    add_tech_bonus = {
-				name = armor_bonus
-				bonus = 1.5
-				uses = 2
-				category = armor
-			}
-			if = {
-				limit = {
-					365 = { 
-						is_fully_controlled_by = ROOT
-						}
-					}
-					365 = {
-						add_extra_state_shared_building_slots = 2
-						add_building_construction = {
-							type = arms_factory
-							level = 2
-							instant_build = yes
-						}
-					}
-			}
-		}
-
-	}
-	focus = {
-		id = USA_recruitment_campaign
-		icon = generic_marching
-		cost = 5
-		x = 82
-		y = 3
-		completion_reward = {
-		    add_ideas = idea_usa_recruitment_campaign
-			if = {
-				limit = {
-					368 = { 
-						is_fully_controlled_by = ROOT
-						}
-					}
-					368 = {
-						add_extra_state_shared_building_slots = 2
-						add_building_construction = {
-							type = arms_factory
-							level = 2
-							instant_build = yes
-						}
-					}
-			}
-			country_event = { id = usa.134 }
-		}
-		prerequisite = {
-			focus = USA_methods_of_reunification
-		}
-	}
-	focus = {
-		id = USA_modernize_fort_gordon
-		icon = GFX_focus_research
-		cost = 5
-		prerequisite = {
-			focus = USA_recruitment_campaign
-		}
-		prerequisite = {
-			focus = USA_heavy_forces
-		}
-		x = 83
-		y = 4
-		completion_reward = {
-			add_research_slot = 1
-		}
-	}
-	focus = {
-		id = USA_expand_fort_jackson
-		icon = GFX_focus_research
-		cost = 5
-		prerequisite = {
-			focus = USA_modernize_fort_gordon
-		}
-		x = 83
-		y = 6
-		completion_reward = {
-			add_research_slot = 1
-		}
-	}
-	focus = {
-		id = USA_the_stronger_the_better
-		icon = GFX_goal_tanks2
-		cost = 5
-		prerequisite = {
-			focus = USA_heavy_forces
-		}
-		x = 85
-		y = 5
-		completion_reward = {
-		    add_tech_bonus = {
-				name = armor_bonus
-				bonus = 1.5
-				uses = 1
-				category = armor
-			}
-			add_breakthrough_progress = {
-				specialization = specialization_land
-				value = 2
-			}
-		}
-
-	}
-	focus = {
-		id = USA_salute_the_sailors
-		icon = GFX_focus_generic_naval_discipline
-		cost = 5
-		prerequisite = {
-			focus = USA_glory_glory_hallelujah
-		}
-		x = 87
-		y = 1
-		completion_reward = {
-		    navy_experience = 15
-			add_doctrine_cost_reduction = {
-				name = naval_doc_bonus
-				cost_reduction = 0.75
-				uses = 1
-				category = naval_doctrine
-			}
-			add_timed_idea = {
-				idea = idea_USA_salute_the_sailors
-				days = 365
-			}
-		}
-
-	}
-	focus = {
-		id = USA_open_sea_tactics
-		icon = navy_doctrine
-		cost = 5
-		prerequisite = {
-			focus = USA_salute_the_sailors
-		}
-		x = 86
-		y = 2
-		completion_reward = {
-			every_core_state = {
-				limit = {
-					is_fully_controlled_by = ROOT
-					is_coastal = yes
-					free_building_slots = {
-						building = dockyard
-						size > 1
-						include_locked = yes
-					}
-				}
-				random_select_amount = 2
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = dockyard
-					level = 2
-					instant_build = yes
-				}
-			}
-		}
-
-	}
-	focus = {
-		id = USA_hidden_americans
-		icon = submarine
-		cost = 5
-		prerequisite = {
-			focus = USA_open_sea_tactics
-		}
-		x = 86
-		y = 3
-		completion_reward = {
-		    add_tech_bonus = {
-				name = ss_tech_bonus
-				bonus = 1
-				uses = 1
-				category = ss_tech
-			}
-			add_breakthrough_progress = {
-				specialization = specialization_naval
-				value = 0.5
-			}
-		}
-
-	}
-	focus = {
-		id = USA_target_the_enemy
-		icon = anti_submarine
-		cost = 5
-		prerequisite = {
-			focus = USA_hidden_americans
-		}
-		x = 86
-		y = 6
-		completion_reward = {
-		    add_tech_bonus = {
-				name = naval_bomber_bonus
-				bonus = 1
-				uses = 1
-				category = naval_bomber
-			}
-		}
-
-	}
-	focus = {
-		id = USA_vessels_of_the_open_seas
-		icon = battleship
-		cost = 5
-		prerequisite = {
-			focus = USA_salute_the_sailors
-		}
-		x = 88
-		y = 2
-		completion_reward = {
-		    add_tech_bonus = {
-				name = ca_tech_bonus
-				bonus = 1
-				uses = 1
-				category = ca_tech
-			}
-		}
-
-	}
-	focus = {
-		id = USA_destructive_potential
-		icon = cruiser
-		cost = 5
-		prerequisite = {
-			focus = USA_vessels_of_the_open_seas
-		}
-		x = 88
-		y = 3
-		completion_reward = {
-		    add_tech_bonus = {
-				name = dd_tech_bonus
-				bonus = 1
-				uses = 1
-				category = dd_tech
-			}
-		}
-
-	}
-	focus = {
-		id = USA_a_disciplined_navy
-		icon = navy_doctrine
-		cost = 5
-		prerequisite = {
-			focus = USA_hidden_americans
-		}
-		prerequisite = {
-			focus = USA_destructive_potential
-		}
-		x = 87
-		y = 4
-		completion_reward = {
-		    navy_experience = 25
-		}
-
-	}
-	focus = {
-		id = USA_carriers
-		icon = carrier
-		cost = 5
-		prerequisite = {
-			focus = USA_destructive_potential
-		}
-		x = 88
-		y = 6
-		completion_reward = {
-		    add_tech_bonus = {
-				name = cv_tech_bonus
-				bonus = 1
-				uses = 1
-				category = cv_tech
-			}
-			add_breakthrough_progress = {
-				specialization = specialization_naval
-				value = 0.5
-			}
-		}
-
-	}
-	focus = {
-		id = USA_salute_the_pilots
-		icon = GFX_focus_CHI_military_mission
-		cost = 5
-		prerequisite = {
-			focus = USA_glory_glory_hallelujah
-		}
-		x = 91
-		y = 1
-		completion_reward = {
-		    air_experience = 15
-			add_doctrine_cost_reduction = {
-				name = air_doc_bonus
-				cost_reduction = 0.75
-				uses = 1
-				category = air_doctrine
-			}
-			add_timed_idea = {
-				idea = idea_USA_salute_the_pilots
-				days = 365
-			}
-		}
-
-	}
-	focus = {
-		id = USA_modern_technology
-		icon = GFX_goal_air_force
-		cost = 5
-		prerequisite = {
-			focus = USA_salute_the_pilots
-		}
-		x = 90
-		y = 2
-		completion_reward = {
-		    add_tech_bonus = {
-				name = light_air_bonus
-				bonus = 1
-				uses = 1
-				category = light_air
-			}
-		}
-
-	}
-	focus = {
-		id = USA_fighter_focus
-		icon = generic_fighter
-		cost = 5
-		prerequisite = {
-			focus = USA_modern_technology
-		}
-		x = 89
-		y = 4
-		completion_reward = {
-		    add_tech_bonus = {
-				name = light_fighter_bonus
-				bonus = 1
-				uses = 1
-				category = light_fighter
-			}
-		}
-
-	}
-	focus = {
-		id = USA_bomber_focus
-		icon = generic_bomber
-		cost = 5
-		prerequisite = {
-			focus = USA_modern_technology
-		}
-		x = 91
-		y = 4
-		completion_reward = {
-		    add_tech_bonus = {
-				name = cat_strategic_bomber_bonus
-				bonus = 1
-				uses = 1
-				category = cat_strategic_bomber
-			}
-			add_breakthrough_progress = {
-				specialization = specialization_air
-				value = 0.5
-			}
-		}
-
-	}
-	focus = {
-		id = USA_modern_strategies
-		icon = air_doctrine
-		cost = 5
-		prerequisite = {
-			focus = USA_salute_the_pilots
-		}
-		x = 92
-		y = 2
-		completion_reward = {
-		    add_doctrine_cost_reduction = {
-				name = air_doc_bonus
-				cost_reduction = 0.5
-				uses = 1
-				category = air_doctrine
-			}
-		}
-
-	}
-	focus = {
-		id = USA_drone_focus
-		icon = drone
-		cost = 5
-		prerequisite = {
-			focus = USA_modern_strategies
-		}
-		x = 92
-		y = 5
-		completion_reward = {
-		    add_tech_bonus = {
-				name = tactical_bomber_bonus
-				bonus = 1
-				uses = 1
-				category = tactical_bomber
-			}
-			add_breakthrough_progress = {
-				specialization = specialization_air
-				value = 0.5
-			}
-		}
-
-	}
-	focus = {
-		id = USA_renew_doctrine
-		icon = close_air_support
-		cost = 10
-		prerequisite = {
-			focus = USA_modern_strategies
-		}
-		x = 93
-		y = 4
-		completion_reward = {
-		    add_tech_bonus = {
-				name = radar_tech_bonus
-				bonus = 0.5
-				uses = 1
-				category = radar_tech
-			}
-			add_breakthrough_progress = {
-				specialization = specialization_air
-				value = 0.5
-			}
-			add_doctrine_cost_reduction = {
-				cost_reduction = 0.5
-				uses = 1
-				category = air_doctrine
-			}
-		}
-
-	}
-	focus = {
 		id = USA_invite_foreign_executives
 		icon = improve_relations
 		cost = 5
@@ -6029,5 +5139,910 @@ focus_tree = {
 			country_event = { id = usa.144 }
 		}
 
+	}
+	####				####
+	####	Diplomatic 	####
+	####				####
+	focus = {
+		id = USA_push_for_recognition
+		icon = focus_commonwealth_un_membership
+		cost = 15
+		available = {
+		    OR = {
+			    has_completed_focus = USA_our_own_paramilitary
+				has_completed_focus = USA_a_white_army
+				has_completed_focus = USA_crush_personal_liberties
+				has_completed_focus = USA_the_kings_army
+				has_completed_focus = USA_army_with_a_nation
+				has_completed_focus = USA_proclaim_confederate_states
+				has_completed_focus = USA_prepare_for_the_healing_process
+				has_completed_focus = USA_freedom_act
+			}
+		}
+		x = 74
+		y = 0
+		completion_reward = {
+		    remove_ideas = idea_usa_international_stigma
+		}
+	}
+	focus = {
+		id = USA_new_friendships
+		icon = improve_relations
+		cost = 7.2
+		prerequisite = {
+			focus = USA_push_for_recognition
+		}
+		mutually_exclusive = {
+			focus = USA_old_friendships
+		}
+		x = 72
+		y = 1
+		completion_reward = {
+		    add_stability = -0.02
+			add_political_power = 70
+		}
+
+	}
+	focus = {
+		id = USA_befriend_spain
+		icon = spain
+		cost = 7.2
+		prerequisite = {
+			focus = USA_new_friendships
+		}
+		x = 70
+		y = 2
+		completion_reward = {
+		    SPR = {
+			    add_opinion_modifier = {
+				    target = USA
+				    modifier = declaration_of_friendship
+			    }
+			}
+		}
+
+	}
+	focus = {
+		id = USA_befriend_thailand
+		icon = thailand
+		cost = 7.2
+		prerequisite = {
+			focus = USA_new_friendships
+		}
+		x = 72
+		y = 2
+		completion_reward = {
+		    SIA = {
+			    add_opinion_modifier = {
+				    target = USA
+				    modifier = declaration_of_friendship
+			    }
+			}
+		}
+
+	}
+	focus = {
+		id = USA_approach_china
+		icon = china
+		cost = 7.2
+		prerequisite = {
+			focus = USA_befriend_spain
+			focus = USA_befriend_thailand
+		}
+		mutually_exclusive = {
+			focus = USA_support_japan
+		}
+		x = 70
+		y = 3
+		completion_reward = {
+		    PRC = {
+			    add_opinion_modifier = {
+				    target = USA
+				    modifier = declaration_of_friendship
+			    }
+			}
+			PRC = {
+			    add_opinion_modifier = {
+				    target = ROOT
+				    modifier = trade_influence_1
+			   }
+			}
+		}
+
+	}
+	focus = {
+		id = USA_support_japan
+		icon = japan
+		cost = 7.2
+		prerequisite = {
+			focus = USA_befriend_thailand
+			focus = USA_befriend_spain
+		}
+		mutually_exclusive = {
+			focus = USA_approach_china
+		}
+		x = 72
+		y = 3
+		completion_reward = {
+		    JAP = {
+			    add_opinion_modifier = {
+				    target = USA
+				    modifier = declaration_of_friendship
+			    }
+			}
+			JAP = {
+			    add_opinion_modifier = {
+				    target = ROOT
+				    modifier = trade_influence_1
+			   }
+			}
+		}
+
+	}
+	focus = {
+		id = USA_old_friendships
+		icon = defence
+		cost = 7.2
+		prerequisite = {
+			focus = USA_push_for_recognition
+		}
+		mutually_exclusive = {
+			focus = USA_new_friendships
+		}
+		x = 76
+		y = 1
+		completion_reward = {
+		    add_political_power = 40
+		}
+
+	}
+	focus = {
+		id = USA_league_of_america
+		icon = alliance
+		cost = 10
+		available = {
+			has_country_flag = the_united_states_are_back
+		}
+		prerequisite = {
+			focus = USA_new_friendships
+			focus = USA_old_friendships
+		}
+		x = 74
+		y = 2
+		completion_reward = {
+		    set_rule = {
+				can_create_factions = yes
+			}
+		}
+
+	}
+	focus = {
+		id = USA_befriend_canada
+		icon = canada
+		cost = 7.2
+		prerequisite = {
+			focus = USA_old_friendships
+		}
+		x = 76
+		y = 2
+		completion_reward = {
+		    CAN = {
+			    add_opinion_modifier = {
+				    target = USA
+				    modifier = declaration_of_friendship
+			    }
+			}
+		}
+
+	}
+	focus = {
+		id = USA_befriend_iran
+		icon = iran
+		cost = 7.2
+		prerequisite = {
+			focus = USA_old_friendships
+		}
+		x = 78
+		y = 2
+		completion_reward = {
+		    PER = {
+			    add_opinion_modifier = {
+				    target = USA
+				    modifier = declaration_of_friendship
+			    }
+			}
+		}
+
+	}
+	focus = {
+		id = USA_befriend_turkey
+		icon = turkey
+		cost = 7.2
+		prerequisite = {
+			focus = USA_befriend_canada
+			focus = USA_befriend_iran
+		}
+		x = 76
+		y = 3
+		completion_reward = {
+		    TUR = {
+			    add_opinion_modifier = {
+				    target = USA
+				    modifier = declaration_of_friendship
+			    }
+			}
+			TUR = {
+			    add_opinion_modifier = {
+				    target = ROOT
+				    modifier = trade_influence_1
+			   }
+			}
+		}
+
+	}
+	focus = {
+		id = USA_approach_britain
+		icon = britain
+		cost = 7.2
+		prerequisite = {
+			focus = USA_befriend_iran
+			focus = USA_befriend_canada
+		}
+		x = 78
+		y = 3
+		completion_reward = {
+		    ENG = {
+			    add_opinion_modifier = {
+				    target = USA
+				    modifier = declaration_of_friendship
+			    }
+			}
+			ENG = {
+			    add_opinion_modifier = {
+				    target = ROOT
+				    modifier = trade_influence_1
+			   }
+			}
+		}
+
+	}
+	
+	######################################
+	####    Glory Glory Hallelujah    ####
+	######################################
+	
+	focus = {
+		id = USA_glory_glory_hallelujah
+		icon = american_military_agreement
+		cost = 10
+		x = 87
+		y = 0
+		search_filters = {
+			FOCUS_FILTER_ARMY_XP
+			FOCUS_FILTER_NAVY_XP
+			FOCUS_FILTER_AIR_XP
+		}
+		completion_reward = {
+		    army_experience = 70
+			navy_experience = 70
+			air_experience = 70
+		}
+	}
+	focus = {
+		id = USA_salute_the_soldiers
+		icon = GFX_focus_generic_military_mission
+		cost = 5
+		prerequisite = {
+			focus = USA_glory_glory_hallelujah
+		}
+		x = 83
+		y = 1
+		search_filters = {
+			FOCUS_FILTER_ARMY_XP
+			FOCUS_FILTER_RESEARCH
+			FOCUS_FILTER_INDUSTRY
+		}
+		completion_reward = {
+		    army_experience = 15
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.75
+				uses = 1
+				category = land_doctrine
+			}
+			add_timed_idea = {
+				idea = idea_USA_salute_the_soldiers
+				days = 365
+			}
+		}
+	}
+	focus = {
+		id = USA_methods_of_reunification
+		icon = GFX_focus_ETH_freedom_at_gunpoint
+		cost = 5
+		prerequisite = {
+			focus = USA_salute_the_soldiers
+		}
+		x = 82
+		y = 2
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+			FOCUS_FILTER_INDUSTRY
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_weapons_bonus
+				bonus = 1
+				uses = 1
+				category = infantry_weapons
+			}
+			if = {
+				limit = {
+					372 = { 
+						is_fully_controlled_by = ROOT
+						}
+					}
+					372 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = arms_factory
+							level = 2
+							instant_build = yes
+						}
+					}
+			}
+		}
+	}
+	focus = {
+		id = USA_special_forces
+		icon = GFX_goal_counter
+		cost = 5
+		prerequisite = {
+			focus = USA_recruitment_campaign
+		}
+		x = 81
+		y = 5
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		completion_reward = {
+		    add_tech_bonus = {
+				name = para_tech_bonus
+				bonus = 1
+				uses = 1
+				category = para_tech
+			}
+		}
+	}
+	focus = {
+		id = USA_weapons_of_reunification
+		icon = GFX_goal_ifv
+		cost = 5
+		prerequisite = {
+			focus = USA_salute_the_soldiers
+		}
+		x = 84
+		y = 2
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+			FOCUS_FILTER_INDUSTRY
+		}
+		completion_reward = {
+			 add_tech_bonus = {
+				name = cat_mechanized_equipment_bonus
+				bonus = 1.5
+				uses = 3
+				category = cat_mechanized_equipment
+			}
+			if = {
+				limit = {
+					374 = { 
+						is_fully_controlled_by = ROOT
+						}
+					}
+					374 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = arms_factory
+							level = 2
+							instant_build = yes
+						}
+					}
+			}
+		}
+	}
+	focus = {
+		id = USA_heavy_forces
+		icon = GFX_focus_generic_heavy_tank
+		cost = 5
+		prerequisite = {
+			focus = USA_weapons_of_reunification
+		}
+		x = 84
+		y = 3
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+			FOCUS_FILTER_INDUSTRY
+		}
+		completion_reward = {
+		    add_tech_bonus = {
+				name = armor_bonus
+				bonus = 1.5
+				uses = 2
+				category = armor
+			}
+			if = {
+				limit = {
+					365 = { 
+						is_fully_controlled_by = ROOT
+						}
+					}
+					365 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = arms_factory
+							level = 2
+							instant_build = yes
+						}
+					}
+			}
+		}
+	}
+	focus = {
+		id = USA_recruitment_campaign
+		icon = generic_marching
+		cost = 5
+		x = 82
+		y = 3
+		search_filters = {
+			FOCUS_FILTER_MANPOWER
+			FOCUS_FILTER_INDUSTRY
+		}
+		completion_reward = {
+		    add_ideas = idea_usa_recruitment_campaign
+			if = {
+				limit = {
+					368 = { 
+						is_fully_controlled_by = ROOT
+						}
+					}
+					368 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = arms_factory
+							level = 2
+							instant_build = yes
+						}
+					}
+			}
+			country_event = { id = usa.134 }
+		}
+		prerequisite = {
+			focus = USA_methods_of_reunification
+		}
+	}
+	focus = {
+		id = USA_modernize_fort_gordon
+		icon = GFX_focus_research
+		cost = 5
+		prerequisite = {
+			focus = USA_recruitment_campaign
+		}
+		prerequisite = {
+			focus = USA_heavy_forces
+		}
+		x = 83
+		y = 4
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+	focus = {
+		id = USA_expand_fort_jackson
+		icon = GFX_focus_research
+		cost = 5
+		prerequisite = {
+			focus = USA_modernize_fort_gordon
+		}
+		x = 83
+		y = 6
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+	focus = {
+		id = USA_the_stronger_the_better
+		icon = GFX_goal_tanks2
+		cost = 5
+		prerequisite = {
+			focus = USA_heavy_forces
+		}
+		x = 85
+		y = 5
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		completion_reward = {
+		    add_tech_bonus = {
+				name = armor_bonus
+				bonus = 1.5
+				uses = 1
+				category = armor
+			}
+			add_breakthrough_progress = {
+				specialization = specialization_land
+				value = 2
+			}
+		}
+	}
+    ### Salute The Sailors ###
+	focus = {
+		id = USA_salute_the_sailors
+		icon = GFX_focus_generic_naval_discipline
+		cost = 5
+		prerequisite = {
+			focus = USA_glory_glory_hallelujah
+		}
+		x = 87
+		y = 1
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+			FOCUS_FILTER_NAVY_XP
+		}
+		completion_reward = {
+		    navy_experience = 15
+			add_doctrine_cost_reduction = {
+				name = naval_doc_bonus
+				cost_reduction = 0.75
+				uses = 1
+				category = naval_doctrine
+			}
+			add_timed_idea = {
+				idea = idea_USA_salute_the_sailors
+				days = 365
+			}
+		}
+	}
+	focus = {
+		id = USA_open_sea_tactics
+		icon = navy_doctrine
+		cost = 5
+		prerequisite = {
+			focus = USA_salute_the_sailors
+		}
+		x = 86
+		y = 2
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		completion_reward = {
+			every_core_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					is_coastal = yes
+					free_building_slots = {
+						building = dockyard
+						size > 1
+						include_locked = yes
+					}
+				}
+				random_select_amount = 2
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = USA_hidden_americans
+		icon = submarine
+		cost = 5
+		prerequisite = {
+			focus = USA_open_sea_tactics
+		}
+		x = 86
+		y = 3
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		completion_reward = {
+		    add_tech_bonus = {
+				name = ss_tech_bonus
+				bonus = 1
+				uses = 1
+				category = ss_tech
+			}
+			add_breakthrough_progress = {
+				specialization = specialization_naval
+				value = 0.5
+			}
+		}
+	}
+	focus = {
+		id = USA_target_the_enemy
+		icon = anti_submarine
+		cost = 5
+		prerequisite = {
+			focus = USA_hidden_americans
+		}
+		x = 86
+		y = 6
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		completion_reward = {
+		    add_tech_bonus = {
+				name = naval_bomber_bonus
+				bonus = 1
+				uses = 1
+				category = naval_bomber
+			}
+		}
+	}
+	focus = {
+		id = USA_vessels_of_the_open_seas
+		icon = battleship
+		cost = 5
+		prerequisite = {
+			focus = USA_salute_the_sailors
+		}
+		x = 88
+		y = 2
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		completion_reward = {
+		    add_tech_bonus = {
+				name = ca_tech_bonus
+				bonus = 1
+				uses = 1
+				category = ca_tech
+			}
+		}
+	}
+	focus = {
+		id = USA_destructive_potential
+		icon = cruiser
+		cost = 5
+		prerequisite = {
+			focus = USA_vessels_of_the_open_seas
+		}
+		x = 88
+		y = 3
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		completion_reward = {
+		    add_tech_bonus = {
+				name = dd_tech_bonus
+				bonus = 1
+				uses = 1
+				category = dd_tech
+			}
+		}
+	}
+	focus = {
+		id = USA_a_disciplined_navy
+		icon = navy_doctrine
+		cost = 5
+		prerequisite = {
+			focus = USA_hidden_americans
+		}
+		prerequisite = {
+			focus = USA_destructive_potential
+		}
+		x = 87
+		y = 4
+		search_filters = {
+			FOCUS_FILTER_NAVY_XP
+		}
+		completion_reward = {
+		    navy_experience = 25
+		}
+	}
+	focus = {
+		id = USA_carriers
+		icon = carrier
+		cost = 5
+		prerequisite = {
+			focus = USA_destructive_potential
+		}
+		x = 88
+		y = 6
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		completion_reward = {
+		    add_tech_bonus = {
+				name = cv_tech_bonus
+				bonus = 1
+				uses = 1
+				category = cv_tech
+			}
+			add_breakthrough_progress = {
+				specialization = specialization_naval
+				value = 0.5
+			}
+		}
+	}
+	### Salute The Pilots ###
+	focus = {
+		id = USA_salute_the_pilots
+		icon = GFX_focus_CHI_military_mission
+		cost = 5
+		prerequisite = {
+			focus = USA_glory_glory_hallelujah
+		}
+		x = 91
+		y = 1
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+			FOCUS_FILTER_AIR_XP
+		}
+		completion_reward = {
+		    air_experience = 15
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 0.75
+				uses = 1
+				category = air_doctrine
+			}
+			add_timed_idea = {
+				idea = idea_USA_salute_the_pilots
+				days = 365
+			}
+		}
+	}
+	focus = {
+		id = USA_modern_technology
+		icon = GFX_goal_air_force
+		cost = 5
+		prerequisite = {
+			focus = USA_salute_the_pilots
+		}
+		x = 90
+		y = 2
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		completion_reward = {
+		    add_tech_bonus = {
+				name = light_air_bonus
+				bonus = 1
+				uses = 1
+				category = light_air
+			}
+		}
+	}
+	focus = {
+		id = USA_fighter_focus
+		icon = generic_fighter
+		cost = 5
+		prerequisite = {
+			focus = USA_modern_technology
+		}
+		x = 89
+		y = 4
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		completion_reward = {
+		    add_tech_bonus = {
+				name = light_fighter_bonus
+				bonus = 1
+				uses = 1
+				category = light_fighter
+			}
+		}
+	}
+	focus = {
+		id = USA_bomber_focus
+		icon = generic_bomber
+		cost = 5
+		prerequisite = {
+			focus = USA_modern_technology
+		}
+		x = 91
+		y = 4
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		completion_reward = {
+		    add_tech_bonus = {
+				name = cat_strategic_bomber_bonus
+				bonus = 1
+				uses = 1
+				category = cat_strategic_bomber
+			}
+			add_breakthrough_progress = {
+				specialization = specialization_air
+				value = 0.5
+			}
+		}
+	}
+	focus = {
+		id = USA_modern_strategies
+		icon = air_doctrine
+		cost = 5
+		prerequisite = {
+			focus = USA_salute_the_pilots
+		}
+		x = 92
+		y = 2
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		completion_reward = {
+		    add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = air_doctrine
+			}
+		}
+	}
+	focus = {
+		id = USA_drone_focus
+		icon = drone
+		cost = 5
+		prerequisite = {
+			focus = USA_modern_strategies
+		}
+		x = 92
+		y = 5
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		completion_reward = {
+		    add_tech_bonus = {
+				name = tactical_bomber_bonus
+				bonus = 1
+				uses = 1
+				category = tactical_bomber
+			}
+			add_breakthrough_progress = {
+				specialization = specialization_air
+				value = 0.5
+			}
+		}
+	}
+	focus = {
+		id = USA_renew_doctrine
+		icon = close_air_support
+		cost = 10
+		prerequisite = {
+			focus = USA_modern_strategies
+		}
+		x = 93
+		y = 4
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		completion_reward = {
+		    add_tech_bonus = {
+				name = radar_tech_bonus
+				bonus = 0.5
+				uses = 1
+				category = radar_tech
+			}
+			add_breakthrough_progress = {
+				specialization = specialization_air
+				value = 0.5
+			}
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 1
+				category = air_doctrine
+			}
+		}
 	}
 }
